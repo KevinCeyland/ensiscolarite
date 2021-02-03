@@ -11,9 +11,9 @@
                 value="%d{ABSOLUTE} %5p %c{1}:%L - %m%n" />
         </layout>
     </appender>
-	<appender name="FILE" class="org.apache.log4j.FileAppender">
+	<appender name="database" class="org.apache.log4j.FileAppender">
 
-	   <param name="file" value="logging.log"/>
+	   <param name="file" value="database.log"/>
 	   <param name="immediateFlush" value="true"/>
 	   <param name="threshold" value="debug"/>
 	   <param name="append" value="true"/>
@@ -22,11 +22,23 @@
 	   		<param name="conversionPattern" value="%m%n"/>
 	   </layout>
 	</appender>
+	<appender name="service" class="org.apache.log4j.FileAppender">
+	   <param name="file" value="service.log"/>
+	   <param name="immediateFlush" value="true"/>
+	   <param name="threshold" value="debug"/>
+	   <param name="append" value="true"/>
+	   
+	   <layout class="org.apache.log4j.PatternLayout">
+	   		<param name="conversionPattern" value="%m%n"/>
+	   </layout>
+	</appender>
+	
     <!-- 
          loggers of category 'org.springframework' will only log messages of level "info" or higher;
          if you retrieve Loggers by using the class name (e.g. Logger.getLogger(AClass.class))
          and if AClass is part of the org.springframework package, it will belong to this category
     -->
+
     <logger name="org.springframework">
         <level value="info"/>
     </logger>
@@ -50,7 +62,8 @@
             all log messages will be logged to the appender "stdout", unless defined otherwise 
         -->
         <level value="debug" />
-        <appender-ref ref="FILE" />
+        <appender-ref ref="database" />
+        <appender-ref ref="service" />
         <appender-ref ref="stdout" />
                 
     </root>

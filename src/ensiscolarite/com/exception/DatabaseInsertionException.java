@@ -14,11 +14,11 @@ public class DatabaseInsertionException extends DatabaseException {
 	
 	public DatabaseInsertionException() {
 		this("Une erreur est survenue avec lors de l'insertion des données");
-		Application.monLogger.error(datenow + " Une erreur est survenue avec lors de l'insertion des données");
+		Application.databaseLogger.error(datenow + " Une erreur est survenue avec lors de l'insertion des données");
 	}
 	public DatabaseInsertionException(String reason) {
 		super(reason);
-		Application.monLogger.error(datenow + " " + reason);
+		Application.databaseLogger.error(datenow + " " + reason);
 	}
 
 	public DatabaseInsertionException(Throwable cause) {

@@ -15,12 +15,12 @@ public class ServiceValidateDateException extends ServiceException {
 
 	public ServiceValidateDateException() {
 		this("Le format de date n'est pas le bon ");
-		Application.monLogger.error(datenow + " Le format de date n'est pas le bon");
+		Application.serviceLogger.error(datenow + " Le format de date n'est pas le bon");
 		
 	}
 	public ServiceValidateDateException(String message) {
 		super(message);
-		Application.monLogger.error(datenow + " " + message);
+		Application.serviceLogger.error(datenow + " " + message);
 		
 	}
 	public ServiceValidateDateException(Throwable cause) {

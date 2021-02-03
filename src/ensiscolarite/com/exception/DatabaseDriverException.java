@@ -14,11 +14,11 @@ public class DatabaseDriverException extends DatabaseException {
 	
 	public DatabaseDriverException() {
 		this(" Classe introuvable, contactez l'administrateur");
-		Application.monLogger.error(datenow + " Classe introuvable, contactez l'administrateur");
+		Application.databaseLogger.error(datenow + " Classe introuvable, contactez l'administrateur");
 	}
 	public DatabaseDriverException(String reason) {
 		super(reason);
-		Application.monLogger.error(datenow + " " + reason);
+		Application.databaseLogger.error(datenow + " " + reason);
 	}
 
 	public DatabaseDriverException(Throwable cause) {

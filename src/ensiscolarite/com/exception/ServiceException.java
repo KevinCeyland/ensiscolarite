@@ -14,12 +14,12 @@ public class ServiceException extends Exception {
 	
 	public ServiceException() {
 		this("une erreur est survenue dans la couche service");
-		Application.monLogger.error(datenow + " une erreur est survenue dans la couche service.");
+		Application.serviceLogger.error(datenow + " une erreur est survenue dans la couche service.");
 		
 	}
 	public ServiceException(String message) {
 		super(message);
-		Application.monLogger.error(datenow + " " + message);
+		Application.serviceLogger.error(datenow + " " + message);
 		
 	}
 	public ServiceException(Throwable cause) {

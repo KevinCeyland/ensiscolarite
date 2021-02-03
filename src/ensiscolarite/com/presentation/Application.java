@@ -13,14 +13,14 @@ import ensiscolarite.com.domaine.Utilisateur;
 import ensiscolarite.com.exception.DatabaseException;
 import ensiscolarite.com.exception.ServiceException;
 import ensiscolarite.com.exception.ServiceValidateDateException;
-import ensiscolarite.com.logger.ActionLogger;
 import ensiscolarite.com.service.ConnexionService;
 import ensiscolarite.com.service.UtilisateurService;
 
 public class Application {
 	
-	public final static Logger monLogger = Logger.getLogger(ActionLogger.class);
-
+	public final static Logger databaseLogger = Logger.getLogger("database");
+	public final static Logger serviceLogger = Logger.getLogger("service");
+	
 	public static void main(String[] args) throws ClassNotFoundException, DatabaseException, ServiceException {
 		try {
 			

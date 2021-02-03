@@ -14,11 +14,11 @@ public class DatabaseRecuperationException extends DatabaseException {
 	
 	public DatabaseRecuperationException() {
 		this("Une erreur est survenue avec lors de la récupération des données");
-		Application.monLogger.error(datenow + " Une erreur est survenue avec lors de la récupération des données");
+		Application.databaseLogger.error(datenow + " Une erreur est survenue avec lors de la récupération des données");
 	}
 	public DatabaseRecuperationException(String reason) {
 		super(reason);
-		Application.monLogger.error(datenow + " " + reason);
+		Application.databaseLogger.error(datenow + " " + reason);
 	}
 
 	public DatabaseRecuperationException(Throwable cause) {
