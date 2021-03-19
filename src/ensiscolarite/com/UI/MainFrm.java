@@ -112,7 +112,6 @@ public class MainFrm extends javax.swing.JFrame {
     	 // create dataset for pie chart
     	
     	ArrayList<Double> lesMoyennes = lesMoyennes();
-    	System.out.println(lesMoyennes.get(0) + " " + lesMoyennes.get(1) + " " + lesMoyennes.get(2));
         DefaultPieDataset dataset = new DefaultPieDataset();
         dataset.setValue("Moyennes bon", lesMoyennes.get(2));
         dataset.setValue("Moyenne intermédiaire", lesMoyennes.get(1));
