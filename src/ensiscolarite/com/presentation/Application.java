@@ -17,6 +17,7 @@ import ensiscolarite.com.exception.DatabaseException;
 import ensiscolarite.com.exception.ServiceException;
 import ensiscolarite.com.exception.ServiceValidateDateException;
 import ensiscolarite.com.service.ConnexionService;
+import ensiscolarite.com.service.GraphiqueService;
 import ensiscolarite.com.service.UtilisateurService;
 
 public class Application {
@@ -62,6 +63,7 @@ public class Application {
 			}
 
 			UtilisateurService utilService = new UtilisateurService();
+			GraphiqueService graphService = new GraphiqueService();
 			Scanner sc = new Scanner(System.in);
 			// On d�clare une variable tryagain de type Boolean � laquel on affecte la
 			// valeur true.
@@ -69,7 +71,7 @@ public class Application {
 			// On affiche le menu avec les diff�rentes options tant que tryagain est true.
 
 			System.out.println(
-					"----------------------------------------------- Que voulez-vous faire ? -----------------------------------------------  \n\n (VOUS DEVEZ RESPECTER LES MAJUSCULES) \n ----------------------- Ajouter : tapez A, \n ----------------------- Modifier : tapez M, \n ----------------------- Supprimer : tapez S, \n ----------------------- Rechercher : tapez R, \n ----------------------- Associer un cours à un étudiant : tapez ACE,  \n ----------------------- Afficher un graphique des moyennes des élèves : tapez G");
+					"----------------------------------------------- Que voulez-vous faire ? -----------------------------------------------  \n\n (VOUS DEVEZ RESPECTER LES MAJUSCULES) \n ----------------------- Ajouter : tapez A, \n ----------------------- Modifier : tapez M, \n ----------------------- Supprimer : tapez S, \n ----------------------- Rechercher : tapez R, \n ----------------------- Associer un cours à un étudiant : tapez ACE ");
 			// Si l'utilisateur connecter est directeur on affiche en plus la possibilit�e
 			// d'afficher la liste des utilisateurs
 			if (utilisateurConnecter.getTypeUser().equals("Directeur")) {
@@ -142,6 +144,8 @@ public class Application {
 							"----------------------------------------------- Vous n'�tes pas autoris� a faire cette action -----------------------------------------------");
 				}
 			case "G":
+				graphService.afficherGraphique();
+				
 				
 				
 				/*

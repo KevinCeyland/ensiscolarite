@@ -16,11 +16,14 @@ public class GraphiqueService {
 	
 	public String afficherGraphique() throws ServiceException {
 		try {
-			lesEtudiants = utilServ.listerEtudiants("SELECT * FROM ");
+			lesEtudiants = utilServ.listerEtudiants();
 			lesNotes = dao.recupererNotesEnBase();
+			System.out.println("LA LISTE DES ETUDIANTS : "+lesEtudiants);
+			System.out.println(" LA LISTE DES NOTES : "+lesNotes);
 		}catch (Exception e)
     		{
-    			throw new ServiceException(e.getMessage());
+    			//throw new ServiceException(e.getMessage());
+			e.printStackTrace();
     		}
 		return null;
 		

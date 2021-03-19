@@ -39,14 +39,14 @@ public class Etudiant extends Utilisateur {
 	
 	public String toString() {
 		String str="\n Nom et prénom de l'étudiant : " + nom + " " + prenom + " née le : " + dateNaissance + "\n Adresse e-mail : " + email + ", numéro de téléphone : " + telephone + "\n Adresse : " + rue  + " " + ville + " " + codepostal + "\n";
-		if(lesCours.isEmpty()) {
+		if(lesCours.isEmpty() || lesCours==null) {
 			
 		}else {
 			str="\n Nom et prénom de l'étudiant : " + nom + " " + prenom + " née le : " + dateNaissance + "\n Adresse e-mail : " + email + ", numéro de téléphone : " + telephone + "\n Adresse : " + rue  + " " + ville + " " + codepostal + "\n Et est inscrit au(x)  "+lesCours+"\n";
 		} 
 		return str;
 	}
-
+	
 	
 	
 	
