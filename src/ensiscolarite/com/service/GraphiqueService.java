@@ -16,7 +16,7 @@ public class GraphiqueService {
 	
 	public String afficherGraphique() throws ServiceException {
 		try {
-			lesEtudiants = utilServ.listerEtudiants();
+			lesEtudiants = utilServ.listerEtudiants("SELECT * FROM ");
 			lesNotes = dao.recupererNotesEnBase();
 		}catch (Exception e)
     		{
