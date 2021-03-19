@@ -8,6 +8,7 @@ public class Etudiant extends Utilisateur {
 	
 	private String dateNaissance;
 	private ArrayList<Cours> lesCours;
+	private ArrayList<Note> lesNotes;
 	// Getters et Setters
 	
 	public String getDateNaissance() {

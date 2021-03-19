@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import ensiscolarite.com.domaine.Cours;
 import ensiscolarite.com.domaine.CoursUsers;
 import ensiscolarite.com.domaine.Etudiant;
+import ensiscolarite.com.domaine.Note;
 import ensiscolarite.com.domaine.Utilisateur;
 import ensiscolarite.com.exception.DatabaseDriverException;
 import ensiscolarite.com.exception.DatabaseException;
@@ -128,6 +129,7 @@ public class ApplicationDao {
 			reponse = "Action bien effectuée !";
 		}catch (SQLException e){
 			throw new DatabaseInsertionException(" Code 506 : Une erreur est survenue avec lors de l'insertion des données");
+			
 			
 		}catch (ClassNotFoundException e){
 			throw new DatabaseDriverException("CODE 505  : Classe Driver introuvable, contactez l'administrateur");
@@ -327,5 +329,59 @@ public class ApplicationDao {
 	      }
 		
 		return lesCoursUsers;
+	}
+	
+	//On tente de récupérer la liste de tout les cours associés aux users
+	public ArrayList<Note> recupererNotesEnBase() throws DatabaseException{
+		Connection conn = null;
+		ResultSet rs= null;
+		Note laListe = null;
+		ArrayList<Note> lesNotes= new ArrayList<Note>();;
+		
+		 try {
+	         try {
+	        	// Objet de type Connection permettant d'établir la connexion avec la base
+	            Class.forName("com.mysql.jdbc.Driver");
+	         } catch (Exception e) {
+	            System.out.println(e);
+	         }
+	         // Objet de type Connection permettant d'établir la connexion avec la base.
+	         conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/ensiscolarite", "root", "");
+	         // Préparation de la requête.
+	         PreparedStatement prep1 = conn.prepareStatement("SELECT * FROM users_note order by idUser");
+	         // Éxécution et récupération du resultat de la requête
+	         rs = prep1.executeQuery();
+	         // Tant que la requête retourne un resultat, on récupérer ses informations et on les affectes à des vériables afin de construire notre
+	         // objet Cours avec ces propriétés puis on affecte l'objet à l'ArrayList Cours.
+	         while(rs.next())
+	         {
+	        	 int id = rs.getInt("id");
+	        	 int idUser = rs.getInt("idUser");
+	        	 int idCours = rs.getInt("idCours");
+	        	 double note= rs.getDouble("note");
+	        	 laListe = new Note(id, idUser, idCours,note);
+		         lesNotes.add(laListe);
+	         }
+	       
+	         return lesNotes;
+	      } catch (SQLException excep) {
+	    	  throw new DatabaseRecuperationException("CODE 504  : Problème lors de la récupération dans la base de données");
+	      } catch (Exception excep) {
+	    	  System.out.println("CODE 500  : Problème lors de la récupération dans la base de données");
+	      } finally {
+	         try {
+	        	// Libérer les ressources de la mémoire, en fermant la connexion à la base.
+	            conn.close();
+	         } catch (SQLException se) {}
+	         try {
+	            if (conn != null)
+	            	// Libérer les ressources de la mémoire, en fermant la connexion à la base.
+	            conn.close();
+	         } catch (SQLException se) {
+	            se.printStackTrace();
+	         }
+	      }
+		
+		return lesNotes;
 	}
 }

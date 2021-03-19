@@ -4,8 +4,11 @@ import java.util.ArrayList;
 
 import java.util.Scanner;
 
+import javax.swing.JFrame;
+
 import org.apache.log4j.Logger;
 
+import ensiscolarite.com.UI.MainFrm;
 import ensiscolarite.com.domaine.Directeur;
 import ensiscolarite.com.domaine.Etudiant;
 import ensiscolarite.com.domaine.ResponsableEtude;
@@ -59,81 +62,111 @@ public class Application {
 			// On d�clare une variable tryagain de type Boolean � laquel on affecte la valeur true.
 			Boolean tryagain = true;
 			// On affiche le menu avec les diff�rentes options tant que tryagain est true.
-			while(tryagain) {
+	
+	        System.out.println("----------------------------------------------- Que voulez-vous faire ? -----------------------------------------------  \n\n (VOUS DEVEZ RESPECTER LES MAJUSCULES) \n ----------------------- Ajouter : tapez AJOUTER, \n ----------------------- Modifier : tapez MODIFIER, \n ----------------------- Supprimer : tapez SUPPRIMER, \n ----------------------- Rechercher : tapez RECHERCHER, \n ----------------------- Associer un cours à un étudiant : tapez ASSOCIER,  \n ----------------------- Afficher un graphique des moyennes des élèves : tapez GRAPHIQUE");
+			// Si l'utilisateur connecter est directeur on affiche en plus la possibilit�e d'afficher la liste des utilisateurs
+			if(utilisateurConnecter.getTypeUser().equals("Directeur")) {
 				
-				System.out.println("----------------------------------------------- Que voulez-vous faire ? -----------------------------------------------  \n\n (VOUS DEVEZ RESPECTER LES MAJUSCULES) \n ----------------------- Ajouter : tapez A, \n ----------------------- Modifier : tapez M, \n ----------------------- Supprimer : tapez S, \n ----------------------- Rechercher : tapez R, \n ----------------------- Associer un cours � un �tudiant : tapez ACE");
-				// Si l'utilisateur connecter est directeur on affiche en plus la possibilit�e d'afficher la liste des utilisateurs
-				if(utilisateurConnecter.getTypeUser().equals("Directeur")) {
-					
-					System.out.println(" ----------------------- Afficher la liste des utilisateurs : tapez U");
-				
-				}
-				System.out.println(" ----------------------- Quitter l'application : tapez STOP");
-				String reponse = sc.nextLine();
-					 switch(reponse){
-				        case "A":
-							System.out.println("\n ----------------------------------------------- Ajout un nouvel �tudiant -----------------------------------------------");
-							try {
-								System.out.println(utilService.creerEtudiant());
-								}catch(ServiceValidateDateException e) {
-									UtilisateurService utilServiceA = new UtilisateurService();
-									System.out.println(e.getMessage()+"OK");
-									System.out.println(utilServiceA.creerEtudiant());
-								}
-							
-				            break;
-				        case "R":
-							System.out.println("\n ----------------------------------------------- Rechercher un �tudiant -----------------------------------------------");
-							ArrayList<Etudiant> lesEtudiants = utilService.lireInformationEtudiant();
-							lesEtudiants=utilService.coursUsers(lesEtudiants);
-							for(Etudiant etudiant : lesEtudiants)
+				System.out.println(" ----------------------- Afficher la liste des utilisateurs : tapez U");
+			
+			}
+			System.out.println(" ----------------------- Quitter l'application : tapez STOP");
+			String reponse = sc.nextLine();
+				 switch(reponse){
+			        case "AJOUT":
+						System.out.println("\n ----------------------------------------------- Ajout un nouvel �tudiant -----------------------------------------------");
+						try {
+							System.out.println(utilService.creerEtudiant());
+							}catch(ServiceValidateDateException e) {
+								UtilisateurService utilServiceA = new UtilisateurService();
+								System.out.println(e.getMessage()+"OK");
+								System.out.println(utilServiceA.creerEtudiant());
+							}
+						
+			            break;
+			        case "RECHERCHE":
+						System.out.println("\n ----------------------------------------------- Rechercher un �tudiant -----------------------------------------------");
+						ArrayList<Etudiant> lesEtudiants = utilService.lireInformationEtudiant();
+						lesEtudiants=utilService.coursUsers(lesEtudiants);
+						for(Etudiant etudiant : lesEtudiants)
+				    	{
+				    		System.out.println(etudiant);
+				    	}
+			            break;
+			        case "MODIFIER": 
+			        	System.out.println("\n----------------------------------------------- Rechercher l'�tudiant � modifier en entrant son nom et puis son pr�nom -----------------------------------------------");
+						System.out.println(utilService.modifierEtudiant());	
+	
+			            break;
+			        case "SUPPRIMER": 
+			        	System.out.println("\n----------------------------------------------- Rechercher l'�tudiant � supprimer en entrant son nom et puis son pr�nom -----------------------------------------------");
+			        	System.out.println(	utilService.supprimerEtudiant());	
+		
+			            break;
+			        case "ASSOCIER": 
+			        	System.out.println("\n----------------------------------------------- Rechercher l'�tudiant � associ� � un cours en entrant son nom et puis son pr�nom ----------------------------------------------- ");
+			        	System.out.println(utilService.associerCoursEtudiant());	
+
+			            break;
+			            
+			        case "GRAPHIQUE": 
+			        	
+			        	System.out.println("\n----------------------------------------------- Affichage du graphique des moyennes des élèves ----------------------------------------------- ");
+			        	 try {
+			 	        	
+			 	            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+			 	                if ("Nimbus".equals(info.getName())) {
+			 	                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+			 	                    break;
+			 	                }
+			 	            }
+			 	        } catch (ClassNotFoundException ex) {
+			 	            java.util.logging.Logger.getLogger(MainFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			 	        } catch (InstantiationException ex) {
+			 	            java.util.logging.Logger.getLogger(MainFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			 	        } catch (IllegalAccessException ex) {
+			 	            java.util.logging.Logger.getLogger(MainFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			 	        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+			 	            java.util.logging.Logger.getLogger(MainFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			 	        }
+			 	        //</editor-fold>
+
+			 	        /* Create and display the form */
+			 	        java.awt.EventQueue.invokeLater(new Runnable() {
+			 	            public void run() {
+			 	                new MainFrm().setVisible(true);
+			 	            }
+			 	        });	
+
+			            break;
+			            
+			       
+			        case "STOP": 
+			        	System.out.println("\n----------------------------------------------- Arr�t du programme -----------------------------------------------");
+			        	System.exit(0);
+
+			            break;
+			        case "U":
+			        	if(utilisateurConnecter.getTypeUser().equals("Directeur"))
+			        	{
+			        		System.out.println("\n----------------------------------------------- Affichage des �tudiants -----------------------------------------------");
+			        		ArrayList<Etudiant> etudiants = utilService.listerEtudiants();
+			        		etudiants = utilService.coursUsers(etudiants);
+							for(Etudiant etudiant : etudiants)
 					    	{
 					    		System.out.println(etudiant);
 					    	}
-				            break;
-				        case "M": 
-				        	System.out.println("\n----------------------------------------------- Rechercher l'�tudiant � modifier en entrant son nom et puis son pr�nom -----------------------------------------------");
-							System.out.println(utilService.modifierEtudiant());	
+				        	break;
+			        	}
+			        	else
+			        	{
+			        		System.out.println("----------------------------------------------- Vous n'�tes pas autoris� a faire cette action -----------------------------------------------");
+			        	}
+			        
+				 }
+				 
 		
-				            break;
-				        case "S": 
-				        	System.out.println("\n----------------------------------------------- Rechercher l'�tudiant � supprimer en entrant son nom et puis son pr�nom -----------------------------------------------");
-				        	System.out.println(	utilService.supprimerEtudiant());	
-			
-				            break;
-				        case "ACE": 
-				        	System.out.println("\n----------------------------------------------- Rechercher l'�tudiant � associ� � un cours en entrant son nom et puis son pr�nom ----------------------------------------------- ");
-				        	System.out.println(utilService.associerCoursEtudiant());	
-
-				            break;
-				            
-				       
-				        case "STOP": 
-				        	System.out.println("\n----------------------------------------------- Arr�t du programme -----------------------------------------------");
-				        	System.exit(0);
-
-				            break;
-				        case "U":
-				        	if(utilisateurConnecter.getTypeUser().equals("Directeur"))
-				        	{
-				        		System.out.println("\n----------------------------------------------- Affichage des �tudiants -----------------------------------------------");
-				        		ArrayList<Etudiant> etudiants = utilService.listerEtudiants();
-				        		etudiants = utilService.coursUsers(etudiants);
-								for(Etudiant etudiant : etudiants)
-						    	{
-						    		System.out.println(etudiant);
-						    	}
-					        	break;
-				        	}
-				        	else
-				        	{
-				        		System.out.println("----------------------------------------------- Vous n'�tes pas autoris� a faire cette action -----------------------------------------------");
-				        	}
-				        
-					 }
-					 
-			
-			}
+		
 			sc.close();
 			
 		} catch (Exception e) {
