@@ -8,7 +8,7 @@ public class Etudiant extends Utilisateur {
 	
 	private String dateNaissance;
 	private ArrayList<Cours> lesCours;
-	private ArrayList<Note> lesNotes;
+	private double moyenne;
 	// Getters et Setters
 	
 	public String getDateNaissance() {
@@ -27,6 +27,14 @@ public class Etudiant extends Utilisateur {
 	}
 	//  Constructeur héritant des propriétés de la class Utilisateur
 	
+	public double getMoyenne() {
+		return moyenne;
+	}
+
+	public void setMoyene(double moyenne) {
+		this.moyenne = moyenne;
+	}
+
 	public Etudiant(int id, String nom, String prenom, String email, String telephone, String rue,String ville,String codepostal, String dateNaissance) {
 		super(id, nom, prenom, email, telephone, rue, ville, codepostal);
 		this.dateNaissance = dateNaissance;
@@ -36,7 +44,17 @@ public class Etudiant extends Utilisateur {
 		this.dateNaissance = dateNaissance;
 		this.lesCours = lesCours;
 	}
+	public Etudiant(int id, String nom, String prenom, String email, String telephone, String rue,String ville,String codepostal, String dateNaissance, double pMoyenne) {
+		super(id, nom, prenom, email, telephone, rue, ville, codepostal);
+		this.dateNaissance = dateNaissance;
+		this.moyenne=pMoyenne;
+	}
 	
+	public Etudiant(int pId, double pMoyenne) {
+		this.id=pId;
+		this.moyenne=pMoyenne;
+		
+	}
 	public String toString() {
 		String str="\n Nom et prénom de l'étudiant : " + nom + " " + prenom + " née le : " + dateNaissance + "\n Adresse e-mail : " + email + ", numéro de téléphone : " + telephone + "\n Adresse : " + rue  + " " + ville + " " + codepostal + "\n";
 		if(lesCours.isEmpty() || lesCours==null) {

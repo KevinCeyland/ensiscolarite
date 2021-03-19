@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import ensiscolarite.com.domaine.Cours;
 import ensiscolarite.com.domaine.CoursUsers;
 import ensiscolarite.com.domaine.Etudiant;
+import ensiscolarite.com.domaine.Moyenne;
 import ensiscolarite.com.domaine.Note;
 import ensiscolarite.com.domaine.Utilisateur;
 import ensiscolarite.com.exception.DatabaseDriverException;
@@ -332,11 +333,11 @@ public class ApplicationDao {
 	}
 	
 	//On tente de récupérer la liste de tout les cours associés aux users
-	public ArrayList<Note> recupererNotesEnBase() throws DatabaseException{
+	public ArrayList<Moyenne> recupererMoyenneEnBase() throws DatabaseException{
 		Connection conn = null;
 		ResultSet rs= null;
-		Note laListe = null;
-		ArrayList<Note> lesNotes= new ArrayList<Note>();;
+		Moyenne laListe = null;
+		ArrayList<Moyenne> lesMoyennes= new ArrayList<Moyenne>();;
 		
 		 try {
 	         try {
@@ -348,7 +349,7 @@ public class ApplicationDao {
 	         // Objet de type Connection permettant d'établir la connexion avec la base.
 	         conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/ensiscolarite", "root", "");
 	         // Préparation de la requête.
-	         PreparedStatement prep1 = conn.prepareStatement("SELECT * FROM users_note order by idUser");
+	         PreparedStatement prep1 = conn.prepareStatement("Select idUser id, AVG(note) note From Users_Note Group by idUser ");
 	         // Éxécution et récupération du resultat de la requête
 	         rs = prep1.executeQuery();
 	         // Tant que la requête retourne un resultat, on récupérer ses informations et on les affectes à des vériables afin de construire notre
@@ -356,14 +357,12 @@ public class ApplicationDao {
 	         while(rs.next())
 	         {
 	        	 int id = rs.getInt("id");
-	        	 int idUser = rs.getInt("idUser");
-	        	 int idCours = rs.getInt("idCours");
 	        	 double note= rs.getDouble("note");
-	        	 laListe = new Note(id, idUser, idCours,note);
-		         lesNotes.add(laListe);
+	        	 laListe = new Moyenne(id, note);
+		         lesMoyennes.add(laListe);
 	         }
 	       
-	         return lesNotes;
+	         return lesMoyennes;
 	      } catch (SQLException excep) {
 	    	  throw new DatabaseRecuperationException("CODE 504  : Problème lors de la récupération dans la base de données");
 	      } catch (Exception excep) {
@@ -382,6 +381,6 @@ public class ApplicationDao {
 	         }
 	      }
 		
-		return lesNotes;
+		return lesMoyennes;
 	}
 }
