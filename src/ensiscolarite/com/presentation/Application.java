@@ -68,6 +68,7 @@ public class Application {
 			if(utilisateurConnecter.getTypeUser().equals("Directeur")) {
 				
 				System.out.println(" ----------------------- Afficher la liste des utilisateurs : tapez U");
+				System.out.println(" ----------------------- Afficher le graphique des notes des etudiants : tapez G ");
 			
 			}
 			System.out.println(" ----------------------- Quitter l'application : tapez STOP");
@@ -162,7 +163,9 @@ public class Application {
 			        	{
 			        		System.out.println("----------------------------------------------- Vous n'�tes pas autoris� a faire cette action -----------------------------------------------");
 			        	}
-			        
+			        case "G" :
+			        	System.out.println("ok pd");
+			        	break;
 				 }
 				 
 		
