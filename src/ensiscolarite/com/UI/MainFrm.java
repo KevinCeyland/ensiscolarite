@@ -2,6 +2,8 @@ package ensiscolarite.com.UI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.util.ArrayList;
+
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -20,28 +22,25 @@ public class MainFrm extends javax.swing.JFrame {
     /**
 	 * 
 	 */
+	private ArrayList<Double> lesMoyennes;
+
+	public ArrayList<Double> lesMoyennes() {
+		return lesMoyennes;
+	}
+
+	public void setLesMoyennes(ArrayList<Double> lesMoyennes) {
+		this.lesMoyennes = lesMoyennes;
+	}
+	
 	private static final long serialVersionUID = 1L;
 	/**
      * Creates new form MainFrm
      */
-    public MainFrm() {
-    	
-        initComponents();
+    public MainFrm(ArrayList<Double> allMoyennes) {
+    	setLesMoyennes(allMoyennes);
+        initComponents(	);
         this.setLocationRelativeTo(null);
         pnChart.setLayout(new java.awt.BorderLayout());
-    }
-
-    private DefaultCategoryDataset createDataset() {
-        // same dataset for line chart and bar chart
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        dataset.addValue(15, "products", "1970");
-        dataset.addValue(30, "products", "1980");
-        dataset.addValue(60, "products", "1990");
-        dataset.addValue(120, "products", "2000");
-        dataset.addValue(240, "products", "2010");
-        dataset.addValue(300, "products", "2014");
-
-        return dataset;
     }
 
     /**
@@ -111,11 +110,13 @@ public class MainFrm extends javax.swing.JFrame {
 
     private void btn3DPieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn3DPieActionPerformed
     	 // create dataset for pie chart
+    	
+    	ArrayList<Double> lesMoyennes = lesMoyennes();
+    	System.out.println(lesMoyennes.get(0) + " " + lesMoyennes.get(1) + " " + lesMoyennes.get(2));
         DefaultPieDataset dataset = new DefaultPieDataset();
-        dataset.setValue("TV", new Double(20));
-        dataset.setValue("DVD", new Double(20));
-        dataset.setValue("Mobile phone", new Double(40));
-        dataset.setValue("Accessories", new Double(10));
+        dataset.setValue("Moyennes bon", lesMoyennes.get(2));
+        dataset.setValue("Moyenne intermédiaire", lesMoyennes.get(1));
+        dataset.setValue("Moyenne mauvaise", lesMoyennes.get(0));
         // create pir chart
         JFreeChart chart = ChartFactory.createPieChart3D(
                 "Moyennes des élèves", // chart title                   
@@ -141,4 +142,5 @@ public class MainFrm extends javax.swing.JFrame {
     private javax.swing.JButton btn3DPie;
     private javax.swing.JPanel pnChart;
     // End of variables declaration//GEN-END:variables
+
 }

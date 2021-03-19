@@ -141,36 +141,35 @@ public class Application {
 					break;
 				} else {
 					System.out.println(
-							"----------------------------------------------- Vous n'�tes pas autoris� a faire cette action -----------------------------------------------");
+							"----------------------------------------------- Vous n'êtes pas autoris� a faire cette action -----------------------------------------------");
 				}
 			case "G":
-				graphService.afficherGraphique();
 				
-				
-				
-				/*
-				 * System.out.
-				 * println("\n----------------------------------------------- Affichage du graphique des moyennes des élèves ----------------------------------------------- "
-				 * ); try {
-				 * 
-				 * for (javax.swing.UIManager.LookAndFeelInfo info :
-				 * javax.swing.UIManager.getInstalledLookAndFeels()) { if
-				 * ("Nimbus".equals(info.getName())) {
-				 * javax.swing.UIManager.setLookAndFeel(info.getClassName()); break; } } } catch
-				 * (ClassNotFoundException ex) {
-				 * java.util.logging.Logger.getLogger(MainFrm.class.getName()).log(java.util.
-				 * logging.Level.SEVERE, null, ex); } catch (InstantiationException ex) {
-				 * java.util.logging.Logger.getLogger(MainFrm.class.getName()).log(java.util.
-				 * logging.Level.SEVERE, null, ex); } catch (IllegalAccessException ex) {
-				 * java.util.logging.Logger.getLogger(MainFrm.class.getName()).log(java.util.
-				 * logging.Level.SEVERE, null, ex); } catch
-				 * (javax.swing.UnsupportedLookAndFeelException ex) {
-				 * java.util.logging.Logger.getLogger(MainFrm.class.getName()).log(java.util.
-				 * logging.Level.SEVERE, null, ex); } //</editor-fold>
-				 * 
-				 * Create and display the form java.awt.EventQueue.invokeLater(new Runnable() {
-				 * public void run() { new MainFrm().setVisible(true); } });
-				 */
+				try {
+
+		            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+		                if ("Nimbus".equals(info.getName())) {
+		                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+		                    break;
+		                }
+		            }
+		        } catch (ClassNotFoundException ex) {
+		            java.util.logging.Logger.getLogger(MainFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		        } catch (InstantiationException ex) {
+		            java.util.logging.Logger.getLogger(MainFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		        } catch (IllegalAccessException ex) {
+		            java.util.logging.Logger.getLogger(MainFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+		            java.util.logging.Logger.getLogger(MainFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		        }
+		        //</editor-fold>
+				ArrayList<Double> lesMoyennes = graphService.afficherGraphique();
+		        /* Create and display the form */
+		        java.awt.EventQueue.invokeLater(new Runnable() {
+		            public void run() {
+		                new MainFrm(lesMoyennes).setVisible(true);
+		            }
+		        });
 
 				break;
 
