@@ -8,7 +8,6 @@ import ensiscolarite.com.domaine.Cours;
 import ensiscolarite.com.domaine.CoursUsers;
 import ensiscolarite.com.domaine.Etudiant;
 import ensiscolarite.com.domaine.Moyenne;
-import ensiscolarite.com.domaine.Note;
 import ensiscolarite.com.domaine.Utilisateur;
 import ensiscolarite.com.exception.DatabaseDriverException;
 import ensiscolarite.com.exception.DatabaseException;
